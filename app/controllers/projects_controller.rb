@@ -24,6 +24,22 @@ class ProjectsController < ApplicationController
         }
   end
 
+  def update
+    project = Project.find_by(id: params[:id])
+    if project
+      project.update(project_params)
+      if project.save
+        render json: ProjectSerializer.new(project)
+      else
+        render json: { message: 'Problem saving project. Please refresh and try again.'}
+      end
+    else
+      render json: {
+        message: 'Project not found. Please refresh and try again.'
+      }
+    end
+  end
+
   private
 
   def project_params
