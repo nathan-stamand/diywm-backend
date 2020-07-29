@@ -40,6 +40,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def destroy
+    project = Project.find_by(id: params[:id])
+    if project
+      project.destroy
+      render json: {project_id: params[:id]}
+    else
+      render json: {message: 'Project not found. Please refresh and try again.'}
+    end
+  end
+
   private
 
   def project_params
