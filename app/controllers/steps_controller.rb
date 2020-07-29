@@ -31,6 +31,21 @@ class StepsController < ApplicationController
     end
   end
 
+  def update
+    project = Project.find_by(id: params[:project_id])
+    project ? step = project.steps.select(|step| step.id == params[:id]) : step = nil
+    if step
+      step.update(step_params)
+      if step.save
+        render json: StepSerializer.new(step)
+      else
+        render json: { message: 'Step could not be updated. Please make sure inputs are valid' }
+      end
+    else
+      render json: { message: 'Step could not be found. Please refresh and try again.' }
+    end
+  end
+
   private
 
   def step_params
