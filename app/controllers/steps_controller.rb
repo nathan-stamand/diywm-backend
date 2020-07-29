@@ -30,4 +30,10 @@ class StepsController < ApplicationController
       }
     end
   end
+
+  private
+
+  def step_params
+    params.require(:step).permit(:header, :materials, :time, :directions)
+  end
 end
