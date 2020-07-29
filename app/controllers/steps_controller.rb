@@ -46,6 +46,17 @@ class StepsController < ApplicationController
     end
   end
 
+  def destroy
+    project = Project.find_by(id: params[:project_id])
+    project ? step = project.steps.select(|step| step.id == params[:id]) : step = nil
+    if step
+      step.destroy
+      render json: { step_id: params[:id] }
+    else
+      render json: { message: 'Step not found. Please refresh and try again.' }
+    end
+  end
+
   private
 
   def step_params
