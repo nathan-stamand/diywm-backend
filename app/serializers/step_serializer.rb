@@ -1,4 +1,4 @@
 class StepSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :header, :materials, :time, :directions, :project_id
+  attributes :key, :header, :materials, :time, :directions, :project_id
 end
