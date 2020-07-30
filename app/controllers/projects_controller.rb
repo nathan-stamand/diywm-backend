@@ -22,6 +22,7 @@ class ProjectsController < ApplicationController
       render json: {
           message: errorMsg
         }
+    end
   end
 
   def update
