@@ -1,9 +1,10 @@
 class StepsController < ApplicationController
   def index
-    steps = Step.all
+    project = Project.find_by(id: params[:project_id])
+    project ? steps = project.steps : steps = Step.all
     render json: StepSerializer.new(steps)
   end
-
+ 
   # def show
   #   project = Project.find_by(id: params[:project_id])
   #   project ? step = project.steps.select(|step| step.id == params[:id]) : step = nil
