@@ -33,7 +33,7 @@ class StepsController < ApplicationController
 
   def update
     project = Project.find_by(id: params[:project_id])
-    project ? step = project.steps.select(|step| step.id == params[:id]) : step = nil
+    project ? step = project.steps.select{|step| step.id == params[:id]} : step = nil
     if step
       step.update(step_params)
       if step.save
