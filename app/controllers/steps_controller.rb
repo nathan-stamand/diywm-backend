@@ -32,8 +32,7 @@ class StepsController < ApplicationController
   end
 
   def update
-    project = Project.find_by(id: params[:project_id])
-    project ? step = project.steps.select{|step| step.id == params[:id]} : step = nil
+    step = Step.find_by(id: params[:id])
     if step
       step.update(step_params)
       if step.save
@@ -47,8 +46,7 @@ class StepsController < ApplicationController
   end
 
   def destroy
-    project = Project.find_by(id: params[:project_id])
-    project ? step = project.steps.select {|step| step.id == params[:id]} : step = nil
+    step = Step.find_by(id: params[:id])
     if step
       step.destroy
       render json: { step_id: params[:id] }
